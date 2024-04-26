@@ -4,6 +4,11 @@
   padding: 2rem;
   text-align: center;
 }
+.custom-bullet {
+  list-style-type: disc;
+  color: black; /* or any other desired bullet style */
+}
+
 
 .logo {
   height: 6em;

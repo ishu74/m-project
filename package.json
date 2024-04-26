@@ -11,6 +11,9 @@
   },
   "dependencies": {
     "@firebase/storage": "^0.12.4",
+    "@fortawesome/fontawesome-free": "^6.5.2",
+    "@fortawesome/free-solid-svg-icons": "^6.5.2",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "bootstrap": "^5.3.3",
     "firebase": "^10.11.0",
     "mdb-react-ui-kit": "^8.0.0",

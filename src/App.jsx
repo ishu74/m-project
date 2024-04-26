@@ -1,110 +1,3 @@
-// import { useEffect, useState } from 'react';
-// import './App.css';
-// import { storage } from "./firebase"
-// import { uuidv4 } from '@firebase/util'
-// import {
-//   deleteObject,
-//   getDownloadURL,
-//   listAll,
-//   ref, uploadBytesResumable,
-// } from "firebase/storage"
-// // import { upload } from '@testing-library/user-event/dist/upload';
-
-// function App() {
-//   const [image, setImage] = useState(null);
-//   const [imglist, setImglist] = useState([]);
-//   const [progress, setProgress] = useState(0);
-//   const imageListRef = ref(storage, "img/")
-
-//   // Upload file
-//   const uploadFile = () => {
-//     if (image == null) return null;
-
-//     const imageRef = ref(storage, `img/${image.name + uuidv4()}`)
-//     const uploadFile = uploadBytesResumable(imageRef, image);
-
-//     uploadFile.on('state_changed', (snapshot) => {
-//       const progress = Math.round(snapshot.bytesTransferred / snapshot.totalBytes * 100);
-//       setProgress(progress)
-//     }, (err) => {
-
-//     }, () => {
-//       setProgress(0);
-//       getDownloadURL(uploadFile.snapshot.ref).then((url) => {
-//         setImglist((prev) => [...prev, { url: url, ref: uploadFile.snapshot.ref }])
-//       })
-//       alert("File uploaded Successfully :)👌")
-//     });
-//     setImage(null)
-//   }
-
-//   // Delete file
-//   const deleteHandel = (ref, url) => {
-//     deleteObject(ref).then((res) => {
-//       setImglist(imglist.filter((img) => img.url !== url))
-//       alert("Successfully deleted")
-//     })
-//   }
-
-//   // Get data
-//   useEffect(() => {
-//     const getData = () => {
-//       listAll(imageListRef).then((res) => {
-//         res.items.map((item) => {
-//           getDownloadURL(item).then((url) => {
-//             setImglist((prev) => [...prev, { url: url, ref: item }])
-//           })
-//         })
-//       })
-//     }
-//     getData()
-//   }, [])
-
-//   return (
-//     <div className="App container mt-3">
-//       <div className='d-flex coloum'>
-//         <input type="file" className="form-control"
-//           id="img-upload"
-//           accept="image/*"
-//           onChange={(event) => {
-//             setImage(event.target.files[0])
-//           }} />
-//         <button className="btn btn-success mx-3" onClick={uploadFile}>Upload</button>
-//       </div>
-
-//       {
-//         progress !== 0 ?(<div className="progress my-2">
-//         <div
-//           className="progress-bar"
-//           role="progressbar"
-//           style={{ width: `${progress}%`, color: "white" }}
-//         ></div>
-//       </div>): null
-// }
-
-//       <div style={{
-//         display: "flex",
-//         flexDirection: "column-reverse",
-//       }}>
-
-//         {imglist && imglist.map((fileobj) => (
-//           <div className='card my-3 w-25'>
-//             <img className="" src={fileobj.url} />
-//             <button className="btn btn-danger deletebtn"
-//               onClick={() => deleteHandel(fileobj.ref, fileobj.url)}
-//             >
-//               Delete
-//             </button>
-//           </div>
-//         ))}
-
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default App;
-
 import { useEffect, useState } from "react";
 import "./App.css";
 import { storage } from "./firebase";
@@ -116,6 +9,8 @@ import {
   ref,
   uploadBytesResumable,
 } from "firebase/storage";
+// import Footer from "./Footer";
+import logo from "../src/assets/clg.png"
 
 function App() {
   const [file, setFile] = useState(null);
@@ -186,68 +81,141 @@ function App() {
   }, []);
 
   return (
-    <div className="App container mt-1">
-      <h1 className="heading text-center " style={{ color: "#7CB9E8" }}>
-        Hardware Controller
-      </h1>
-      <div className="d-flex column mt-4">
-        <input
-          type="file"
-          className="form-control"
-          onChange={(event) => setFile(event.target.files[0])}
-        />
-        <button className="btn btn-success mx-3" onClick={uploadFile}>
-          Upload
-        </button>
-      </div>
+    <div className="">
+  <nav className="navbar navbar-light bg-light">
+  <div className="container d-flex justify-content-between align-items-center">
+    <img
+      src={logo}
+      alt="logo"
+      className="navbar-brand"
+      style={{ maxHeight: "140px", maxWidth: "140px" }}
+    />
+    <div className="text-center w-100% m-auto ml-3px"> {/* Use a div to center the heading */}
+      <h1 className="m-0 text-center">Hardware Controller</h1>
+    </div>
+    {/* You can add additional elements here if needed */}
+  </div>
+</nav>
 
-      {progress !== 0 && (
-        <div className="progress my-2">
-          <div
-            className="progress-bar"
-            role="progressbar"
-            style={{ width: `${progress}%`, color: "white" }}
-          ></div>
+      <div className="App container mt-1">
+        <p className="d-flex column mt-3 mb-0">Choose Your File.</p>
+        <div className="d-flex column ">
+          <input
+            type="file"
+            className="form-control"
+            onChange={(event) => setFile(event.target.files[0])}
+          />
+          <button className="btn btn-success mx-3" onClick={uploadFile}>
+            Upload
+          </button>
         </div>
-      )}
 
-      <div style={{ display: "flex", flexDirection: "column-reverse" }}>
-        {fileList.map((fileObj) => (
-          <div className="card my-3 w-25" key={fileObj.url}>
-            <a href={fileObj.url} target="_blank" rel="noopener noreferrer">
-              {fileObj.url}
-            </a>
-            <button
-              className="btn btn-danger deletebtn"
-              onClick={() => deleteFile(fileObj.ref, fileObj.url)}
-            >
-              Delete
-            </button>
+        {progress !== 0 && (
+          <div className="progress my-2">
+            <div
+              className="progress-bar"
+              role="progressbar"
+              style={{ width: `${progress}%`, color: "white" }}
+            ></div>
           </div>
-        ))}
+        )}
+
+        <div style={{ display: "flex", flexDirection: "column-reverse" }}>
+          {fileList.map((fileObj) => (
+            <div className="card my-3 w-25" key={fileObj.url}>
+              <a href={fileObj.url} target="_blank" rel="noopener noreferrer">
+                {fileObj.url}
+              </a>
+              <button
+                className="btn btn-danger deletebtn"
+                onClick={() => deleteFile(fileObj.ref, fileObj.url)}
+              >
+                Delete
+              </button>
+            </div>
+          ))}
+        </div>
       </div>
-      <div
-        bgColor="light"
-        className="text-center text-lg-start text-muted mt-3"
+      <div className="container mt-4">
+        <h3 style={{ color: "red" }}>Disclaimer - Read Before Use</h3>
+        <ul
+          className=" mt-3"
+          style={{
+            listStyle: "none",
+            padding: 0,
+            textAlign: "left",
+            marginLeft: "20px",
+          }}
+        >
+          <li className="custom-bullet">
+            Your file name should be <strong>Blink2.ino</strong>.
+          </li>
+          <li className="custom-bullet">
+            First check, If there is any file already uploaded , you must have
+            to <strong>Delete</strong>that file otherwise operation will be <strong>Failed</strong>.
+          </li>
+          <li className="custom-bullet">
+            After clicking upload button you will have to wait until the file is
+            uploaded and <strong>Delete</strong> your uploaded file before concluding our session.
+          </li>
+          
+          <li className="custom-bullet">
+            Users are advised not to upload any sensitive or private documents.
+            This application holds no responsibility for any consequences
+            arising from such actions.
+            <strong>
+              {" "}
+              It is intended for educational or practical purposes only
+            </strong>
+            .
+          </li>
+          {/* Add more bullet points if needed */}
+        </ul>
+      </div>
+
+      {/* footer */}
+      <footer
+        style={{
+          position: "fixed",
+          left: 0,
+          bottom: 0,
+          width: "100%",
+          backgroundColor: "#f5f5f5",
+          padding: "20px 0",
+          textAlign: "center",
+        }}
       >
-        <div className="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
-          <div className="me-5 d-none d-lg-block">
-            <span>Get connected with us on social networks:</span>
+        <div className="container">
+          <div className="footer-description">
+            <p>
+              Our company takes pride in providing user-friendly software
+              solutions such as this. We greatly appreciate your interest and
+              trust in our products.{" "}
+            </p>
+            <p>Stay connected with us: नमस्ते 🙏</p>
           </div>
-          <div>
-          <a href='' className='me-4 text-reset'>
-            <span color='secondary' fab icon='facebook-f' />
-          </a>
-          <a href='' className='me-4 text-reset'>
-            <span color='secondary' fab icon='twitter' />
-          </a>
-        
-          <a href='' className='me-4 text-reset'>
-            <span color='secondary' fab icon='github' />
-          </a>
+          <ul
+            className="footer-links"
+            style={{ listStyle: "none", padding: 0 }}
+          >
+            <li style={{ display: "inline-block", margin: "0 10px" }}>
+              <a href="#">About Us</a>
+            </li>
+            <li style={{ display: "inline-block", margin: "0 10px" }}>
+              <a href="#">Contact Us</a>
+            </li>
+            <li style={{ display: "inline-block", margin: "0 10px" }}>
+              <a href="#">Privacy Policy</a>
+            </li>
+          </ul>
+          <div className="footer-info">
+            <p style={{ margin: 0 }}>
+              &copy; {new Date().getFullYear()} Hardware-Controller. All rights
+              reserved.
+            </p>
+          </div>
         </div>
-        </div>
-      </div>
+      </footer>
     </div>
   );
 }
