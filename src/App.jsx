@@ -10,7 +10,7 @@ import {
   uploadBytesResumable,
 } from "firebase/storage";
 // import Footer from "./Footer";
-import logo from "../src/assets/clg.png"
+// import logo from "../src/assets/clg.png"
 
 function App() {
   const [file, setFile] = useState(null);
@@ -81,21 +81,12 @@ function App() {
   }, []);
 
   return (
-    <div className="">
-  <nav className="navbar navbar-light bg-light">
-  <div className="container d-flex justify-content-between align-items-center">
-    <img
-      src={logo}
-      alt="logo"
-      className="navbar-brand"
-      style={{ maxHeight: "140px", maxWidth: "140px" }}
-    />
-    <div className="text-center w-100% m-auto ml-3px"> {/* Use a div to center the heading */}
-      <h1 className="m-0 text-center">Hardware Controller</h1>
-    </div>
-    {/* You can add additional elements here if needed */}
-  </div>
-</nav>
+    <div className="App">
+<nav className="navbar navbar-light bg-light" >
+        <div className="container d-flex justify-content-center align-items-center">
+          <h1 className="m-0">Hardware Controller</h1>
+        </div>
+      </nav>
 
       <div className="App container mt-1">
         <p className="d-flex column mt-3 mb-0">Choose Your File.</p>
@@ -136,56 +127,48 @@ function App() {
           ))}
         </div>
       </div>
-      <div className="container mt-4">
-        <h3 style={{ color: "red" }}>Disclaimer - Read Before Use</h3>
-        <ul
-          className=" mt-3"
-          style={{
-            listStyle: "none",
-            padding: 0,
-            textAlign: "left",
-            marginLeft: "20px",
-          }}
-        >
-          <li className="custom-bullet">
-            Your file name should be <strong>Blink2.ino</strong>.
-          </li>
-          <li className="custom-bullet">
-            First check, If there is any file already uploaded , you must have
-            to <strong>Delete</strong>that file otherwise operation will be <strong>Failed</strong>.
-          </li>
-          <li className="custom-bullet">
-            After clicking upload button you will have to wait until the file is
-            uploaded and <strong>Delete</strong> your uploaded file before concluding our session.
-          </li>
-          
-          <li className="custom-bullet">
-            Users are advised not to upload any sensitive or private documents.
-            This application holds no responsibility for any consequences
-            arising from such actions.
-            <strong>
-              {" "}
-              It is intended for educational or practical purposes only
-            </strong>
-            .
-          </li>
-          {/* Add more bullet points if needed */}
-        </ul>
+      <div className="container mt-1" style={{ minHeight: "calc(200vh - 200px)", overflowY: "auto" }}>
+        {/* Your existing content */}
+        <div className="mt-4 mb-5"> {/* Add margin top and bottom */}
+          <h3 style={{ color: "red" }}>Disclaimer - Read Before Use</h3>
+          <ul
+            className="mt-3"
+            style={{
+              listStyle: "none",
+              padding: 0,
+              textAlign: "left",
+              marginLeft: "20px",
+            }}
+          >
+            <li className="custom-bullet">
+              Your file name should be <strong>Blink2.ino</strong>.
+            </li>
+            <li className="custom-bullet">
+              First check, If there is any file already uploaded, you must <strong>Delete</strong> that file before uploading a new one.
+            </li>
+            <li className="custom-bullet">
+              After clicking the upload button, you will have to wait until the file is uploaded and then <strong>Delete</strong> your uploaded file before concluding your session.
+            </li>
+            <li className="custom-bullet">
+              Users are advised not to upload any sensitive or private documents. This application holds no responsibility for any consequences arising from such actions. <strong>It is intended for educational or practical purposes only </strong>.
+            </li>
+          </ul>
+        </div>
       </div>
 
       {/* footer */}
       <footer
         style={{
-          position: "fixed",
+        position:"fixed",
           left: 0,
           bottom: 0,
           width: "100%",
           backgroundColor: "#f5f5f5",
-          padding: "20px 0",
+          padding: "0px 0",
           textAlign: "center",
         }}
       >
-        <div className="container">
+        <div className="footer">
           <div className="footer-description">
             <p>
               Our company takes pride in providing user-friendly software
