@@ -16,12 +16,12 @@ function App() {
   const [file, setFile] = useState(null);
   const [fileList, setFileList] = useState([]);
   const [progress, setProgress] = useState(0);
-  const fileRef = ref(storage, "files/");
+  const fileRef = ref(storage);
 
   const uploadFile = () => {
     if (file === null) return;
 
-    const fileRef = ref(storage, `files/${file.name}`);
+    const fileRef = ref(storage, file.name);
     const uploadTask = uploadBytesResumable(fileRef, file);
 
     uploadTask.on(
@@ -82,7 +82,7 @@ function App() {
 
   return (
     <div className="App">
-<nav className="navbar navbar-light bg-light" >
+      <nav className="navbar navbar-light bg-light">
         <div className="container d-flex justify-content-center align-items-center">
           <h1 className="m-0">Hardware Controller</h1>
         </div>
@@ -127,9 +127,14 @@ function App() {
           ))}
         </div>
       </div>
-      <div className="container mt-1" style={{ minHeight: "calc(200vh - 200px)", overflowY: "auto" }}>
+      <div
+        className="container mt-1"
+        style={{ minHeight: "calc(200vh - 200px)", overflowY: "auto" }}
+      >
         {/* Your existing content */}
-        <div className="mt-4 mb-5"> {/* Add margin top and bottom */}
+        <div className="mt-4 mb-5">
+          {" "}
+          {/* Add margin top and bottom */}
           <h3 style={{ color: "red" }}>Disclaimer - Read Before Use</h3>
           <ul
             className="mt-3"
@@ -144,13 +149,26 @@ function App() {
               Your file name should be <strong>Blink2.ino</strong>.
             </li>
             <li className="custom-bullet">
-              First check, If there is any file already uploaded, you must <strong>Delete</strong> that file before uploading a new one.
+              First check, If there is any file already uploaded, you must have
+              to <strong>Delete</strong> that file before uploading a new one.
             </li>
             <li className="custom-bullet">
-              After clicking the upload button, you will have to wait until the file is uploaded and then <strong>Delete</strong> your uploaded file before concluding your session.
+              After clicking the upload button, you will have to wait until the
+              file is uploaded and then <strong>Delete</strong> your uploaded
+              file before concluding your session.
             </li>
             <li className="custom-bullet">
-              Users are advised not to upload any sensitive or private documents. This application holds no responsibility for any consequences arising from such actions. <strong>It is intended for educational or practical purposes only </strong>.
+              Users are advised not to upload any <strong>sensitive</strong> or
+              private documents. This application holds no responsibility for
+              any consequences arising from such actions.{" "}
+              <strong>
+                It is intended for educational or practical purposes only.
+              </strong>
+              .
+            </li>
+            <li className="custom-bullet">
+              After the uploading process, observe the output in real-time
+              via the NETSEE software.
             </li>
           </ul>
         </div>
@@ -159,7 +177,7 @@ function App() {
       {/* footer */}
       <footer
         style={{
-        position:"fixed",
+          position: "fixed",
           left: 0,
           bottom: 0,
           width: "100%",
