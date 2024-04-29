@@ -10,13 +10,24 @@ import {
   uploadBytesResumable,
 } from "firebase/storage";
 // import Footer from "./Footer";
-// import logo from "../src/assets/clg.png"
+// import logo from "../src/assets/clg.png"  
 
 function App() {
   const [file, setFile] = useState(null);
   const [fileList, setFileList] = useState([]);
   const [progress, setProgress] = useState(0);
   const fileRef = ref(storage);
+  const BASE_URL = 'http://localhost:5000'
+
+  const fetchStreamUrl = async () => {
+    try {
+      const response = await axios.get(`${BASE_URL}/api/stream`);
+      return response.data.streamUrl;
+    } catch (error) {
+      console.error('Error fetching stream URL:', error);
+      throw error;
+    }
+  };
 
   const uploadFile = () => {
     if (file === null) return;
@@ -84,7 +95,7 @@ function App() {
     <div className="App">
       <nav className="navbar navbar-light bg-light">
         <div className="container d-flex justify-content-center align-items-center">
-          <h1 className="m-0">Hardware Controller</h1>
+          <h1 className="m-0">Real-Time Hardware Controller</h1>
         </div>
       </nav>
 
@@ -146,7 +157,7 @@ function App() {
             }}
           >
             <li className="custom-bullet">
-              Your file name should be <strong>Blink2.ino</strong>.
+              Your file name should be <strong>Blink1.ino</strong>.
             </li>
             <li className="custom-bullet">
               First check, If there is any file already uploaded, you must have
@@ -168,7 +179,7 @@ function App() {
             </li>
             <li className="custom-bullet">
               After the uploading process, observe the output in real-time
-              via the NETSEE software.
+              via the <strong> NETSEE software </strong> .
             </li>
           </ul>
         </div>
@@ -217,6 +228,8 @@ function App() {
           </div>
         </div>
       </footer>
+
+      
     </div>
   );
 }
